@@ -21,3 +21,6 @@ out/
 **/*.yaml
 **/*.yml
 **/*.html
+
+# Vendor
+vendor/

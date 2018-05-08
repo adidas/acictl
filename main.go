@@ -1,7 +1,7 @@
 package main
 
-import "fmt"
+import "github.com/jorgechato/acictl/cmd"
 
 func main() {
-	fmt.Println("vim-go")
+	cmd.Execute()
 }
