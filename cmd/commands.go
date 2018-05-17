@@ -1,9 +1,8 @@
 package cmd
 
 import (
-	"github.com/spf13/cobra"
-
 	"github.com/jorgechato/acictl/utils"
+	"github.com/spf13/cobra"
 )
 
 var (
@@ -21,11 +20,12 @@ var (
 		Use:   "config [APPNAME]",
 		Short: "Configure",
 		Long:  "",
-		Args:  cobra.ExactArgs(1),
+		Args:  cobra.NoArgs,
 		Run:   config,
 	}
 
 	verbose bool
+	debug   bool
 )
 
 func init() {
@@ -35,5 +35,13 @@ func init() {
 		"v",
 		false,
 		"verbose output",
+	)
+
+	rootCmd.PersistentFlags().BoolVarP(
+		&debug,
+		"debug",
+		"d",
+		false,
+		"debug output",
 	)
 }

@@ -22,7 +22,7 @@ func New() Generator {
 			Dot:       dot,
 			Templates: path.Join(dot, "templates"),
 		},
-		Sources: utils.SOURCES,
+		Sources: utils.Sources(),
 	}
 
 	os.MkdirAll(g.Folders.Templates, 0777)
@@ -32,5 +32,5 @@ func New() Generator {
 
 // DownloadTemplates download the required templates
 func (g *Generator) DownloadTemplates() {
-	fmt.Print(g)
+	// TODO
 }
