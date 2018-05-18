@@ -8,11 +8,14 @@ import (
 var (
 	rootCmd = &cobra.Command{Use: utils.NAME}
 
+	verbose bool
+	debug   bool
+
 	initCmd = &cobra.Command{
 		Use:   "init",
 		Short: "Initialize an Acid working directory",
 		Long:  "",
-		Args:  cobra.ExactArgs(1),
+		Args:  cobra.NoArgs,
 		Run:   initialize,
 	}
 
@@ -24,8 +27,7 @@ var (
 		Run:   config,
 	}
 
-	verbose bool
-	debug   bool
+	repoPtr string
 )
 
 func init() {
@@ -44,4 +46,13 @@ func init() {
 		false,
 		"debug output",
 	)
+
+	configCmd.Flags().StringVarP(
+		&repoPtr,
+		"repo",
+		"r",
+		"",
+		"Repository where to store the config files",
+	)
+	configCmd.MarkFlagRequired("repo")
 }

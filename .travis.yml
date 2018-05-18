@@ -1,0 +1,33 @@
+language: go
+sudo: false
+notifications:
+  email: false
+
+jobs:
+  include:
+    - stage: test
+      os: linux
+      go:
+        - 1.10.x
+        - tip
+      go_import_path: github.com/jorgechato/acictl
+      before_install:
+        - make install_dep
+        - dep ensure
+      script:
+        - make test
+      # after_success:
+        # - bash <(curl -s https://codecov.io/bash)
+    - stage: deploy
+      os: osx
+      go: 1.10.x
+      go_import_path: github.com/jorgechato/acictl
+      install: skip
+      script: skip
+      deploy:
+        - provider: releases
+          skip_cleanup: true
+          on:
+            repo: jorgechato/acictl
+            branch: master
+            tags: true

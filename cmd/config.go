@@ -18,14 +18,14 @@ func config(cmd *cobra.Command, args []string) {
 		"",
 	)
 
-	err := c.Run(
+	c.Run(
 		bytes.Buffer{},
 		func(res *http.Response, b string) {
+
 		},
 		verbose,
 		debug,
 	)
 
-	fmt.Print(err)
 	fmt.Print("With love by adidas.")
 }
