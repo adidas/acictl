@@ -3,21 +3,39 @@ sudo: false
 notifications:
   email: false
 
+addons:
+  sonarcloud:
+    organization: "jorgechato-github"
+    token:
+      secure: $SONAR_TOKEN
+
+stages:
+  - test
+  - name: deploy
+    if: branch = master
+
+before_script:
+
 jobs:
   include:
     - stage: test
-      os: linux
       go:
         - 1.10.x
-        - tip
+        - 1.9.x
       go_import_path: github.com/jorgechato/acictl
-      before_install:
+      before_script:
         - make install_dep
         - dep ensure
+        - make install_unit
+        - make install_cov
       script:
-        - make test
-      after_success:
-        - bash <(curl -s https://codecov.io/bash)
+        - make unit
+      script:
+        - make linter
+      script:
+        - make cov
+      after_script:
+        - sonar-scanner
     - stage: deploy
       os: osx
       go: 1.10.x

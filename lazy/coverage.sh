@@ -1,12 +1,9 @@
 #!/usr/bin/env bash
 
 set -e
-echo "" > coverage.txt
+echo "" > coverage.xml
 
-for d in $(go list ./... | grep -v vendor); do
-    go test -race -coverprofile=profile.out -covermode=atomic $d
-    if [ -f profile.out ]; then
-        cat profile.out >> coverage.txt
-        rm profile.out
-    fi
+for D in $(go list ./... | grep -v vendor | grep -v cmd); do
+    go test -coverprofile=coverage.out $D
+    gocov convert coverage.out | gocov-xml > coverage.xml
 done

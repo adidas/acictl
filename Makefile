@@ -9,11 +9,23 @@ default: build test
 install_dep:
 	curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
 
-get_dep:
-	go get -t -v ./...
+install_cov:
+	go get -u github.com/axw/gocov/...
+	go get -u github.com/AlekSi/gocov-xml
+	go get -u gopkg.in/alecthomas/gometalinter.v2
+	gometalinter.v2 --install
+
+install_unit:
+	go get -u github.com/jstemmer/go-junit-report
 
 build:
 	go install
 
-test:
+linter:
+	gometalinter.v2 --checkstyle > report.xml
+
+cov:
 	./lazy/coverage.sh
+
+unit:
+	go test -v ./... | go-junit-report > test.xml
