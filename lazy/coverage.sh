@@ -5,5 +5,4 @@ echo "" > coverage.xml
 
 for D in $(go list ./... | grep -v vendor | grep -v cmd); do
     go test -coverprofile=coverage.out $D
-    gocov convert coverage.out | gocov-xml > coverage.xml
 done

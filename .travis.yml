@@ -27,7 +27,7 @@ jobs:
         - make install_dep
         - dep ensure
         - make install_unit
-        - make install_cov
+        - make install_dev
       script:
         - make unit
         - make linter

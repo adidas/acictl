@@ -9,9 +9,7 @@ default: build test
 install_dep:
 	curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
 
-install_cov:
-	go get -u github.com/axw/gocov/...
-	go get -u github.com/AlekSi/gocov-xml
+install_dev:
 	go get -u gopkg.in/alecthomas/gometalinter.v2
 	gometalinter.v2 --install
 
