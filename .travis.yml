@@ -16,8 +16,8 @@ jobs:
         - dep ensure
       script:
         - make test
-      # after_success:
-        # - bash <(curl -s https://codecov.io/bash)
+      after_success:
+        - bash <(curl -s https://codecov.io/bash)
     - stage: deploy
       os: osx
       go: 1.10.x
