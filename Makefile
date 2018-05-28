@@ -4,7 +4,9 @@ ARCH=$(shell go env GOARCH)
 GOPATH=$(shell go env GOPATH)
 GOBIN=$(GOPATH)/bin
 
-default: build test
+default: test build
+
+test: unit cov linter
 
 install_dep:
 	curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
@@ -19,11 +21,17 @@ install_unit:
 build:
 	go install
 
+run:
+	go run ${LDFLAGS} manage.go
+
 linter:
 	gometalinter.v2 --checkstyle > report.xml
 
 cov:
-	./lazy/coverage.sh
+	go test -coverprofile=coverage.out ./...
 
 unit:
 	go test -v ./... | go-junit-report > test.xml
+
+clean:
+	rm -rf server *.out *.xml

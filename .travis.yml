@@ -29,9 +29,7 @@ jobs:
         - make install_unit
         - make install_dev
       script:
-        - make unit
-        - make linter
-        - make cov
+        - make test
       after_script:
         - sonar-scanner
     - stage: deploy
