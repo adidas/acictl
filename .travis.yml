@@ -3,18 +3,10 @@ sudo: false
 notifications:
   email: false
 
-addons:
-  sonarcloud:
-    organization: "jorgechato-github"
-    token:
-      secure: $SONAR_TOKEN
-
 stages:
-  - test
+  - name: test
   - name: deploy
-    if: branch = master
-
-before_script:
+    if: branch = master OR tag =~ ^[0-9]+[.]{1}[0-9]+
 
 jobs:
   include:
@@ -22,6 +14,11 @@ jobs:
       go:
         - 1.10.x
         - 1.9.x
+      addons:
+        sonarcloud:
+          organization: "jorgechato-github"
+          token:
+            secure: $SONAR_TOKEN
       go_import_path: github.com/jorgechato/acictl
       before_script:
         - make install_dep
@@ -32,16 +29,41 @@ jobs:
         - make test
       after_script:
         - sonar-scanner
+
     - stage: deploy
       os: osx
       go: 1.10.x
       go_import_path: github.com/jorgechato/acictl
-      install: skip
-      script: skip
+      before_script:
+        - make os_dep
+      script:
+        - dep ensure
+      before_deploy:
+        - make release
       deploy:
         - provider: releases
+          api_key: $GITHUB_OAUTH_TOKEN
+          file:
+            - release/acictl-linux-amd64
+            - release/acictl-linux-amd64.sha256
+            - release/acictl-darwin-amd64
+            - release/acictl-darwin-amd64.sha256
+            - release/acictl-freebsd-amd64
+            - release/acictl-freebsd-amd64.sha256
+            - release/acictl-windows-amd64.exe
+            - release/acictl-windows-amd64.exe.sha256
+            - release/acictl-linux-386
+            - release/acictl-linux-386.sha256
+            - release/acictl-darwin-386
+            - release/acictl-darwin-386.sha256
+            - release/acictl-freebsd-386
+            - release/acictl-freebsd-386.sha256
+            - release/acictl-windows-386.exe
+            - release/acictl-windows-386.exe.sha256
           skip_cleanup: true
           on:
             repo: jorgechato/acictl
-            branch: master
             tags: true
+
+addons:
+  ssh_known_hosts: github.com

@@ -4,6 +4,9 @@ ARCH=$(shell go env GOARCH)
 GOPATH=$(shell go env GOPATH)
 GOBIN=$(GOPATH)/bin
 
+
+.PHONY: release
+
 default: test build
 
 test: unit cov linter
@@ -35,3 +38,10 @@ unit:
 
 clean:
 	rm -rf server *.out *.xml
+
+release:
+	./lazy/build.sh
+
+os_dep:
+	curl -L -s https://github.com/golang/dep/releases/download/v0.3.1/dep-linux-amd64 -o $GOPATH/bin/dep
+	chmod +x $GOPATH/bin/dep
