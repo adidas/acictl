@@ -41,7 +41,3 @@ clean:
 
 release:
 	./lazy/build.sh
-
-os_dep:
-	curl -L -s https://github.com/golang/dep/releases/download/v0.3.1/dep-linux-amd64 -o $GOPATH/bin/dep
-	chmod +x $GOPATH/bin/dep
