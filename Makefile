@@ -37,7 +37,7 @@ unit:
 	go test -v ./... | go-junit-report > test.xml
 
 clean:
-	rm -rf server *.out *.xml
+	rm -rf server *.out *.xml release
 
 release:
 	./lazy/build.sh
