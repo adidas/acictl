@@ -39,3 +39,9 @@ func TestNew(t *testing.T) {
 	assert.True(mode.IsDir(), "Should be a directory")
 	assert.Equal("drwxr-xr-x", mode.String(), "Permissions should be 0777")
 }
+
+func TestDownloadTemplates(t *testing.T) {
+	g := New()
+	err := g.DownloadTemplates()
+	assert.Nil(t, err, "Error should be nil")
+}

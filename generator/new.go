@@ -31,6 +31,7 @@ func New() Generator {
 }
 
 // DownloadTemplates download the required templates
-func (g *Generator) DownloadTemplates() {
+func (g *Generator) DownloadTemplates() error {
 	// TODO
+	return nil
 }

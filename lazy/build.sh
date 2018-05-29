@@ -26,5 +26,5 @@ for OS in ${BUILD_PLATFORMS[@]}; do
 		 -o "${ROOT}/release/${NAME}" main.go
 
 		shasum -a 256 "${ROOT}/release/${NAME}" > "${ROOT}/release/${NAME}".sha256
-	  done
 	done
+done
