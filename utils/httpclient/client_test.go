@@ -109,7 +109,7 @@ func (s *ServerSuite) TestRunFail() {
 		s.T(),
 		err,
 		fmt.Sprintf(
-			utils.ERROR["client"],
+			utils.Error().Client,
 			fmt.Sprintf(
 				"%v %v",
 				http.StatusNotFound,

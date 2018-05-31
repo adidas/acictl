@@ -52,7 +52,7 @@ func (c Client) Run(body bytes.Buffer, callback func(res *http.Response, b strin
 	} else {
 		return errors.New(
 			fmt.Sprintf(
-				utils.ERROR["client"],
+				utils.Error().Client,
 				resp.Status,
 			),
 		)
