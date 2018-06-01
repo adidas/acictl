@@ -21,9 +21,8 @@ func Execute() {
 }
 
 func root(cmd *cobra.Command, args []string) {
-	fmt.Println(version)
 	if version {
-		fmt.Printf(cmd.Long)
+		fmt.Println(cmd.Long)
 	} else {
 		cmd.Help()
 	}

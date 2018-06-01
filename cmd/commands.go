@@ -12,24 +12,17 @@ var (
 		Use: utils.NAME,
 		Long: fmt.Sprintf(
 			`%v v%v is a CLI to control the acid project.
-This environment is a tool to generate the needed files
-to quickly create a Jenkins as a service application in K8S.`,
+This application is a tool to generate the needed files
+to quickly create a Jenkins as a service environment in K8S.`,
 			utils.NAME,
 			utils.VERSION,
 		),
 		Run: root,
 	}
 
+	version bool
 	verbose bool
 	debug   bool
-
-	versionCmd = &cobra.Command{
-		Use:   "version",
-		Short: "acictl version",
-		Long:  "",
-		Args:  cobra.NoArgs,
-		Run:   version,
-	}
 
 	initCmd = &cobra.Command{
 		Use:   "init",
@@ -51,6 +44,14 @@ to quickly create a Jenkins as a service application in K8S.`,
 )
 
 func init() {
+	rootCmd.Flags().BoolVarP(
+		&version,
+		"version",
+		"V",
+		false,
+		"acictl version",
+	)
+
 	rootCmd.PersistentFlags().BoolVarP(
 		&verbose,
 		"verbose",
