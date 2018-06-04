@@ -23,24 +23,6 @@ to quickly create a Jenkins as a service environment in K8S.`,
 	version bool
 	verbose bool
 	debug   bool
-
-	initCmd = &cobra.Command{
-		Use:   "init",
-		Short: "Initialize an Acid working directory",
-		Long:  "",
-		Args:  cobra.NoArgs,
-		Run:   initialize,
-	}
-
-	configCmd = &cobra.Command{
-		Use:   "config [APPNAME]",
-		Short: "Configure",
-		Long:  "",
-		Args:  cobra.NoArgs,
-		Run:   config,
-	}
-
-	repoPtr string
 )
 
 func init() {
@@ -68,12 +50,6 @@ func init() {
 		"debug output",
 	)
 
-	configCmd.Flags().StringVarP(
-		&repoPtr,
-		"repo",
-		"r",
-		"",
-		"Repository where to store the config files",
-	)
-	configCmd.MarkFlagRequired("repo")
+	deployPtr()
+	configPtr()
 }

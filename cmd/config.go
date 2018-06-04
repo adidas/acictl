@@ -9,6 +9,29 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var (
+	configCmd = &cobra.Command{
+		Use:   "config [APPNAME]",
+		Short: "Configure",
+		Long:  "",
+		Args:  cobra.NoArgs,
+		Run:   config,
+	}
+
+	repoPtr string
+)
+
+func configPtr() {
+	configCmd.Flags().StringVarP(
+		&repoPtr,
+		"repo",
+		"r",
+		"",
+		"Repository where to store the config files",
+	)
+	configCmd.MarkFlagRequired("repo")
+}
+
 func config(cmd *cobra.Command, args []string) {
 	c := httpclient.NewClient(
 		"https://api.github.com",

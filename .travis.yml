@@ -27,7 +27,7 @@ jobs:
         - make install_dev
       script:
         - make test
-      after_script:
+      after_success:
         - sonar-scanner
 
     - stage: deploy

@@ -11,7 +11,7 @@ LDFLAGS:="-X github.com/jorgechato/acictl/utils.VERSION=${MAIN_VERSION}"
 
 default: test build
 
-test: linter cov unit
+test: cov unit
 
 install_dep:
 	curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh

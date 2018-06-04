@@ -12,6 +12,7 @@ func Execute() {
 	rootCmd.AddCommand(
 		initCmd,
 		configCmd,
+		deployCmd,
 	)
 
 	if err := rootCmd.Execute(); err != nil {
