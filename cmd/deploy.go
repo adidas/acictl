@@ -27,6 +27,7 @@ func deployPtr() {
 		"",
 		"Path to the kubeconfig file to use for CLI requests",
 	)
+
 	deployCmd.MarkFlagRequired("kubeconfig")
 }
 

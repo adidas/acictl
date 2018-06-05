@@ -1,11 +1,7 @@
 package cmd
 
 import (
-	"bytes"
-	"fmt"
-	"net/http"
-
-	"github.com/jorgechato/acictl/utils/httpclient"
+	"github.com/jorgechato/acictl/generator"
 	"github.com/spf13/cobra"
 )
 
@@ -18,7 +14,8 @@ var (
 		Run:   config,
 	}
 
-	repoPtr string
+	repoPtr  string
+	tokenPtr string
 )
 
 func configPtr() {
@@ -29,26 +26,18 @@ func configPtr() {
 		"",
 		"Repository where to store the config files",
 	)
-	configCmd.MarkFlagRequired("repo")
+
+	configCmd.Flags().StringVarP(
+		&tokenPtr,
+		"token",
+		"t",
+		"",
+		"Token with the right to perform github operations",
+	)
+
+	configCmd.MarkFlagRequired("token")
 }
 
 func config(cmd *cobra.Command, args []string) {
-	c := httpclient.NewClient(
-		"https://api.github.com",
-		"GET",
-		"application/json",
-		"",
-		"",
-	)
-
-	c.Run(
-		bytes.Buffer{},
-		func(res *http.Response, b string) {
-
-		},
-		verbose,
-		debug,
-	)
-
-	fmt.Print("With love by adidas.")
+	generator.NewConfig("", tokenPtr)
 }

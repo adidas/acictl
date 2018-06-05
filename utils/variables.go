@@ -58,3 +58,10 @@ func Msg() messages {
 		Canonical: "Rewrites config files to canonical format",
 	}
 }
+
+func Repo() repo {
+	return repo{
+		Instance: "config-%v",
+		Base:     "config-base",
+	}
+}

@@ -11,3 +11,8 @@ type messages struct {
 	Download  string
 	Canonical string
 }
+
+type repo struct {
+	Base     string
+	Instance string
+}
