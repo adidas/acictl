@@ -17,7 +17,11 @@ Acictl must first be installed on your machine. Acictl is distributed as a binar
 
 To install Acictl, find the appropriate package for your system and download it.
 
-After downloading Acictl, rename the binary to `acictl`. Acictl runs as a single binary named acictl-[OS]-[arch].
+After downloading Acictl, rename the binary to `acictl` and if you are in UNIX systems and it is needed add the required permissions. Acictl runs as a single binary named acictl-[OS]-[arch].
+
+```bash
+$ chmod +x acictl
+```
 
 The final step is to make sure that the acictl binary is available on the PATH. See [this page](https://stackoverflow.com/questions/14637979/how-to-permanently-set-path-on-linux-unix) for instructions on setting the PATH on Linux and Mac. [This page](https://stackoverflow.com/questions/1618280/where-can-i-set-path-to-make-exe-on-windows) contains instructions for setting the PATH on Windows.
 
@@ -41,6 +45,15 @@ Available Commands:
 
 If you get an error that acictl could not be found, your PATH environment variable was not set up properly. Please go back and ensure that your PATH variable contains the directory where Acictl was installed.
 
+You can verify the SHA256 hashes easily by placing the files in the same folder as the download artifact and then running `shasum`, which is included in most UNIX-like systems:
+
+```bash
+$ ls
+acictl-darwin-386        acictl-darwin-386.sha256
+$ shasum -a 256 -c acictl-darwin-386.sha256
+acictl-darwin-386: OK
+```
+
 ### Developing Acictl
 
 If you wish to work on Acictl itself, you'll first need Go installed on your machine (version 1.10+ is required). Alternatively, you can use the Vagrantfile in the root of this repo to stand up a virtual machine with the appropriate dev tooling already set up for you.
@@ -56,7 +69,7 @@ You'll need to run `make tools` to install some required tools, then `make`.  Th
 You only need to run `make tools` once (or when the tools change).
 
 ```sh
-$ cd "$GOPATH/src/github.com/adidas/acictl"
+$ cd "$GOPATH/src/github.com/jorgechato/acictl"
 $ make tools
 $ make
 ```
@@ -84,9 +97,9 @@ Assuming your work is on a branch called `my-feature-branch`, the steps look lik
 
 1. Add the new package to your `vendor/` directory:
 
-```bash
-$ dep ensure -add github.com/foo/bar
-```
+    ```bash
+    $ dep ensure -add github.com/foo/bar
+    ```
 
 2. Review the changes in git and commit them.
 
@@ -96,9 +109,9 @@ To update a dependency:
 
 1. Fetch the dependency:
 
-```bash
-$ dep ensure -update github.com/foo/bar
-```
+    ```bash
+    $ dep ensure -update github.com/foo/bar
+    ```
 
 2. Review the changes in git and commit them.
 
@@ -117,8 +130,6 @@ Check out the [CONTRIBUTING.md](CONTRIBUTING.md) file to know how to contribute 
 © adidas AG
 
 adidas AG publishes this software and accompanied documentation (if any) subject to the terms of the MIT license with the aim of helping the community with our tools and libraries which we think can be also useful for other people. You will find a copy of the MIT license in the root folder of this package. All rights not explicitly granted to you under the MIT license remain the sole and exclusive property of adidas AG.
-
-NOTICE: The software has been designed solely for the purpose of analyzing the code quality by checking the coding guidelines. The software is NOT designed, tested or verified for productive use whatsoever, nor or for any use related to high risk environments, such as health care, highly or fully autonomous driving, power plants, or other critical infrastructures or services.
 
 If you want to contact adidas regarding the software, you can mail us at _software.engineering@adidas.com_.
 

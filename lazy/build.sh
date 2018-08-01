@@ -32,6 +32,6 @@ for OS in ${BUILD_PLATFORMS[@]}; do
 		GOARCH=${ARCH} GOOS=${OS} CGO_ENABLED=${CGO_ENABLED} ${GO_BUILD_CMD} -ldflags "${LDFLAGS}"\
 		-o "${ROOT}/release/${NAME}" main.go
 
-		shasum -a 256 "${ROOT}/release/${NAME}" > "${ROOT}/release/${NAME}".sha256
+		shasum -a 256 "${ROOT}/release/${NAME}" | awk '{sub(/.*\//," ",$2);print}' > "${ROOT}/release/${NAME}".sha256
 	done
 done

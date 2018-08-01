@@ -22,7 +22,7 @@ jobs:
       go_import_path: github.com/jorgechato/acictl
       before_script:
         - make tools
-        - dep ensure
+        - make vendor
       script:
         - make cov
         - make unit

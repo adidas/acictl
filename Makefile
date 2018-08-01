@@ -15,6 +15,9 @@ tools:
 	curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
 	go get -u github.com/jstemmer/go-junit-report
 
+vendor:
+	dep ensure -v -vendor-only
+
 build:
 	go build -ldflags ${LDFLAGS} -a -o acictl main.go
 
