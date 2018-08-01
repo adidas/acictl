@@ -7,20 +7,12 @@ GOBIN:=$(GOPATH)/bin
 LDFLAGS:="-X github.com/jorgechato/acictl/utils.VERSION=${MAIN_VERSION}"
 
 
-.PHONY: release
+.PHONY: release default test build run linter cov unit clean tools
 
 default: test build
 
-test: cov unit
-
-install_dep:
+tools:
 	curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
-
-install_dev:
-	go get -u gopkg.in/alecthomas/gometalinter.v2
-	gometalinter.v2 --install
-
-install_unit:
 	go get -u github.com/jstemmer/go-junit-report
 
 build:
@@ -29,8 +21,20 @@ build:
 run:
 	go run -ldflags ${LDFLAGS} main.go
 
-linter:
-	gometalinter.v2 --checkstyle > report.xml
+clean:
+	rm -rf acictl *.out *.xml release
+
+release:
+	./lazy/build.sh ${LDFLAGS}
+
+test: fmtcheck
+	go list $(TEST) | xargs -t -n4 go test $(TESTARGS) -timeout=60s -parallel=4
+
+fmt:
+	gofmt -w $(GOFMT_FILES)
+
+fmtcheck:
+	@sh -c "'$(CURDIR)/lazy/gofmtcheck.sh'"
 
 cov:
 	go test -coverprofile=coverage.out ./...
@@ -38,8 +42,9 @@ cov:
 unit:
 	go test -v ./... | go-junit-report > test.xml
 
-clean:
-	rm -rf acictl *.out *.xml release
+tools-dev: tools
+	go get -u gopkg.in/alecthomas/gometalinter.v2
+	gometalinter.v2 --install
 
-release:
-	./lazy/build.sh ${LDFLAGS}
+linter:
+	gometalinter.v2 --checkstyle > report.xml

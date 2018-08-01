@@ -21,12 +21,11 @@ jobs:
             secure: $SONAR_TOKEN
       go_import_path: github.com/jorgechato/acictl
       before_script:
-        - make install_dep
+        - make tools
         - dep ensure
-        - make install_unit
-        - make install_dev
       script:
-        - make test
+        - make cov
+        - make unit
       after_success:
         - sonar-scanner
 
@@ -34,7 +33,7 @@ jobs:
       go: 1.10.x
       go_import_path: github.com/jorgechato/acictl
       before_script:
-        - make install_dep
+        - make tools
       script:
         - dep ensure
       before_deploy:
