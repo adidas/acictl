@@ -17,7 +17,7 @@ Acictl must first be installed on your machine. Acictl is distributed as a binar
 
 To install Acictl, find the appropriate package for your system and download it.
 
-After downloading Acictl, rename the binary to acictl. Acictl runs as a single binary named acictl-[OS]-[arch].
+After downloading Acictl, rename the binary to `acictl`. Acictl runs as a single binary named acictl-[OS]-[arch].
 
 The final step is to make sure that the acictl binary is available on the PATH. See [this page](https://stackoverflow.com/questions/14637979/how-to-permanently-set-path-on-linux-unix) for instructions on setting the PATH on Linux and Mac. [This page](https://stackoverflow.com/questions/1618280/where-can-i-set-path-to-make-exe-on-windows) contains instructions for setting the PATH on Windows.
 
@@ -67,3 +67,63 @@ If you're developing a specific package, you can run tests for just that package
 $ make test TEST=./generator
 ...
 ```
+
+### Dependencies
+
+Acictl stores its dependencies under `vendor/`, which [Go 1.6+ will automatically recognize and load](https://golang.org/cmd/go/#hdr-Vendor_Directories). We use [`dep`](https://github.com/golang/dep) to manage the dep dependencies.
+
+If you're developing Acictl, there are a few tasks you might need to perform.
+
+#### Adding a dependency
+
+If you're adding a dependency, you'll need to vendor it in the same Pull Request as the code that depends on it.
+
+To add a dependency:
+
+Assuming your work is on a branch called `my-feature-branch`, the steps look like this:
+
+1. Add the new package to your `vendor/` directory:
+
+```bash
+$ dep ensure -add github.com/foo/bar
+```
+
+2. Review the changes in git and commit them.
+
+#### Updating a dependency
+
+To update a dependency:
+
+1. Fetch the dependency:
+
+```bash
+$ dep ensure -update github.com/foo/bar
+```
+
+2. Review the changes in git and commit them.
+
+## FAQ
+
+### Maintainers
+
+Check the contributor list and you will be welcome if you want to contribute.
+
+### Contributing
+
+Check out the [CONTRIBUTING.md](CONTRIBUTING.md) file to know how to contribute to this project.
+
+## License and Software Information
+
+© adidas AG
+
+adidas AG publishes this software and accompanied documentation (if any) subject to the terms of the MIT license with the aim of helping the community with our tools and libraries which we think can be also useful for other people. You will find a copy of the MIT license in the root folder of this package. All rights not explicitly granted to you under the MIT license remain the sole and exclusive property of adidas AG.
+
+NOTICE: The software has been designed solely for the purpose of analyzing the code quality by checking the coding guidelines. The software is NOT designed, tested or verified for productive use whatsoever, nor or for any use related to high risk environments, such as health care, highly or fully autonomous driving, power plants, or other critical infrastructures or services.
+
+If you want to contact adidas regarding the software, you can mail us at _software.engineering@adidas.com_.
+
+For further information open the [adidas terms and conditions](https://github.com/adidas/adidas-contribution-guidelines/wiki/Terms-and-conditions) page.
+
+### License
+
+[MIT](LICENSE)
