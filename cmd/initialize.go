@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"github.com/jorgechato/acictl/generator"
+	"github.com/adidas/acictl/generator"
 	"github.com/spf13/cobra"
 )
 

@@ -3,7 +3,7 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/jorgechato/acictl/k8s"
+	"github.com/adidas/acictl/k8s"
 	"github.com/spf13/cobra"
 )
 

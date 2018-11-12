@@ -1,0 +1,29 @@
+settings:
+  legacy:
+    force: true
+    interval: 0s
+schema:
+- name: kafkactl
+  path: .
+  commands:
+    clean:
+      status: true
+    fmt:
+      status: true
+    test:
+      status: true
+    install:
+      status: true
+    run:
+      status: true
+  watcher:
+    extensions:
+    - go
+    - lock
+    - toml
+    paths:
+    - /
+    ignored_paths:
+    - .git
+    - vendor
+    - out

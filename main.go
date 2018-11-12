@@ -1,6 +1,6 @@
 package main
 
-import "github.com/jorgechato/acictl/cmd"
+import "github.com/adidas/acictl/cmd"
 
 func main() {
 	cmd.Execute()

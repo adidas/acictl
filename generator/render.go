@@ -3,7 +3,7 @@ package generator
 import (
 	// "encoding/xml"
 
-	"github.com/jorgechato/acictl/generator/github"
+	"github.com/adidas/acictl/generator/github"
 )
 
 // NewConfig Generate a new config.xml with the base configuration.

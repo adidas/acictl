@@ -1,17 +1,16 @@
-# AdiCTL
-[![Build Status](https://travis-ci.com/jorgechato/acictl.svg?token=x3vLcsQVEzf1kfJyx1Uv&branch=master)](https://travis-ci.com/jorgechato/acictl)
+# AciCTL
+[![Build Status](https://travis-ci.com/adidas/acictl.svg?token=x3vLcsQVEzf1kfJyx1Uv&branch=master)](https://travis-ci.com/adidas/acictl)
 [![Build Status](https://sonarcloud.io/api/project_badges/measure?project=com.adidas.acictl&metric=coverage)](https://sonarcloud.io/dashboard?id=com.adidas.acictl)
 [![Build Status](https://sonarcloud.io/api/project_badges/measure?project=com.adidas.acictl&metric=alert_status)](https://sonarcloud.io/dashboard?id=com.adidas.acictl)
-[![Go Report Card](https://goreportcard.com/badge/github.com/adidas/adictl)](https://goreportcard.com/report/github.com/adidas/adictl)
-[![Godoc](https://img.shields.io/badge/go-documentation-blue.svg)](https://godoc.org/github.com/adidas/adictl)
+[![Go Report Card](https://goreportcard.com/badge/github.com/adidas/adcctl)](https://goreportcard.com/report/github.com/adidas/acictl)
+[![Godoc](https://img.shields.io/badge/go-documentation-blue.svg)](https://godoc.org/github.com/adidas/acictl)
 
-**TODO: Change all reference of jorgechato repo to adidas**
 
 ## Getting Started & Documentation
 
 If you're new to Acid and want to get started creating your own Jenkins as a service with kubernetes, please checkout our Getting Started guide.
 
-Acictl must first be installed on your machine. Acictl is distributed as a binary package for all supported platforms and architectures. You can download it from [here](https://github.com/jorgechato/acictl/releases).
+Acictl must first be installed on your machine. Acictl is distributed as a binary package for all supported platforms and architectures. You can download it from [here](https://github.com/adidas/acictl/releases).
 
 ### Installing acictl
 
@@ -63,21 +62,22 @@ This repository contains only Acictl core, which includes the command line inter
 For local development of Acictl core, first make sure Go is properly installed and that a
 [GOPATH](http://golang.org/doc/code.html#GOPATH) has been set. You will also need to add `$GOPATH/bin` to your `$PATH`.
 
-Next, using [Git](https://git-scm.com/), clone this repository into `$GOPATH/src/github.com/jorgechato/acictl`.
+Next, using [Git](https://git-scm.com/), clone this repository into `$GOPATH/src/github.com/adidas/acictl`.
 
-You'll need to run `make tools` to install some required tools, then `make`.  This will compile the code and then run the tests. If this exits with exit status 0, then everything is working!
-You only need to run `make tools` once (or when the tools change).
+You'll need to run `make setup` to install some required tools, then `make dev`.  This will compile the code and then run the tests. If this exits with exit status 0, then everything is working!
+You only need to run `make server` once (or when the tools change).
 
 ```sh
-$ cd "$GOPATH/src/github.com/jorgechato/acictl"
-$ make tools
-$ make
+$ cd "$GOPATH/src/github.com/adidas/acictl"
+$ make setup
+$ make dep
+$ make server
 ```
 
 If you're developing a specific package, you can run tests for just that package by specifying the `TEST` variable. For example below, only `generator` package tests will be run.
 
 ```sh
-$ make test TEST=./generator
+$ make unit TEST=./generator
 ...
 ```
 

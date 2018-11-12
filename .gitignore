@@ -8,6 +8,8 @@
 **/*.test
 coverage*
 test.xml
+tests.xml
+test.output
 report.xml
 .scannerwork
 

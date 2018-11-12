@@ -7,8 +7,7 @@ var VERSION string = "1.0"
 const (
 	NAME    string = "acictl"
 	PROJECT string = "acid"
-	// COMPANY string = "adidas"
-	COMPANY string = "jorgechato"
+	COMPANY string = "adidas"
 )
 
 func Templates() []string {

@@ -6,7 +6,7 @@ import (
 	"os/user"
 	"path"
 
-	"github.com/jorgechato/acictl/utils"
+	"github.com/adidas/acictl/utils"
 )
 
 // New creates the $HOME/.acid/templates folder and download all requirements

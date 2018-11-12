@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/adidas/acictl/utils"
 	"github.com/google/go-github/github"
-	"github.com/jorgechato/acictl/utils"
 	"golang.org/x/oauth2"
 )
 

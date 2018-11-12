@@ -4,50 +4,48 @@ PLATFORM:=$(shell go env GOOS)
 ARCH:=$(shell go env GOARCH)
 GOPATH:=$(shell go env GOPATH)
 GOBIN:=$(GOPATH)/bin
-LDFLAGS:="-X github.com/jorgechato/acictl/utils.VERSION=${MAIN_VERSION}"
+LDFLAGS:="-X github.com/adidas/acictl/utils.VERSION=${MAIN_VERSION}"
+M = $(shell printf "\033[34;1m▶\033[0m")
 
 
-.PHONY: release default test build run linter cov unit clean tools
+.PHONY: build clean dep schema help default server setup vendor release test
 
-default: test build
+default: help
 
-tools:
-	curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
-	go get -u github.com/jstemmer/go-junit-report
+vendor: ; $(info $(M) Download dev dependencies...)
+	go get github.com/oxequa/realize
+	go get -u github.com/tebeka/go2xunit
 
-vendor:
+setup: ; $(info $(M) Fetching github.com/golang/dep...)
+	go get github.com/golang/dep/cmd/dep
+
+dep: setup ; $(info $(M) Ensuring vendored dependencies are up-to-date...) ## Download dependencies
 	dep ensure -v -vendor-only
 
-build:
+build: dep ; $(info $(M) Building project...) ## Build server binary
 	go build -ldflags ${LDFLAGS} -a -o acictl main.go
 
 run:
 	go run -ldflags ${LDFLAGS} main.go
 
-clean:
+clean: ; $(info $(M) Removing generated files... ) ## Clean schema bind data
 	rm -rf acictl *.out *.xml release
 
-release:
+release: ; $(info $(M) Release project...) ## Release binary
 	./lazy/build.sh ${LDFLAGS}
 
-test: fmtcheck
-	go list $(TEST) | xargs -t -n4 go test $(TESTARGS) -timeout=60s -parallel=4
+test: vendor ; $(info $(M) Run tests...) ## Start unit tests
+	go test -race -cover -v -coverprofile=coverage.out ./... > test.output
+	cat test.output | go2xunit -output tests.xml
 
-fmt:
-	gofmt -w $(GOFMT_FILES)
+server: vendor ; $(info $(M) Starting development server...) ## Start development server
+	realize start
+
+unit: vendor ; $(info $(M) Run unit tests...) ## Start unit tests
+	go list $(TEST) | xargs -t -n4 go test $(TESTARGS) -timeout=60s -parallel=4
 
 fmtcheck:
 	@sh -c "'$(CURDIR)/lazy/gofmtcheck.sh'"
 
-cov:
-	go test -coverprofile=coverage.out ./...
-
-unit:
-	go test -v ./... | go-junit-report > test.xml
-
-tools-dev: tools
-	go get -u gopkg.in/alecthomas/gometalinter.v2
-	gometalinter.v2 --install
-
-linter:
-	gometalinter.v2 --checkstyle > report.xml
+help: ## Show this help
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'

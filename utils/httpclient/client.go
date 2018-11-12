@@ -10,7 +10,7 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/jorgechato/acictl/utils"
+	"github.com/adidas/acictl/utils"
 )
 
 // Run simple sugar code http Client
