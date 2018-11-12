@@ -1,8 +1,12 @@
+<p style="width: 100%; padding: 100px; text-align: center;">
+  <img src="./.github/images/logo.png" width="250" align="right" alt="HTML Templar"/>
+</p>
+
 # AciCTL
 [![Build Status](https://travis-ci.com/adidas/acictl.svg?token=x3vLcsQVEzf1kfJyx1Uv&branch=master)](https://travis-ci.com/adidas/acictl)
 [![Build Status](https://sonarcloud.io/api/project_badges/measure?project=com.adidas.acictl&metric=coverage)](https://sonarcloud.io/dashboard?id=com.adidas.acictl)
 [![Build Status](https://sonarcloud.io/api/project_badges/measure?project=com.adidas.acictl&metric=alert_status)](https://sonarcloud.io/dashboard?id=com.adidas.acictl)
-[![Go Report Card](https://goreportcard.com/badge/github.com/adidas/adcctl)](https://goreportcard.com/report/github.com/adidas/acictl)
+[![Go Report Card](https://goreportcard.com/badge/github.com/adidas/acictl)](https://goreportcard.com/report/github.com/adidas/acictl)
 [![Godoc](https://img.shields.io/badge/go-documentation-blue.svg)](https://godoc.org/github.com/adidas/acictl)
 
 
@@ -123,7 +127,7 @@ Check the contributor list and you will be welcome if you want to contribute.
 
 ### Contributing
 
-Check out the [CONTRIBUTING.md](CONTRIBUTING.md) file to know how to contribute to this project.
+Check out the [CONTRIBUTING.md](.github/CONTRIBUTING.md) file to know how to contribute to this project.
 
 ## License and Software Information
 

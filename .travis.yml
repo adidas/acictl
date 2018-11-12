@@ -6,7 +6,6 @@ notifications:
 stages:
   - name: test
   - name: deploy
-    if: branch = master OR tag =~ ^[0-9]+[.]{1}[0-9]+
 
 jobs:
   include:
